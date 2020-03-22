@@ -7,10 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Webpage Title -->
-    <title>스파르타 쇼핑</title>
+    <title>애완펭귄 분양</title>
 
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+    <!--CSS-->
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!--Style-->
     <style>
@@ -54,6 +61,42 @@
 
         }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        function order() {
+            let name = $('p_name').val();
+            let address = $('p_address').val();
+            let phonenumber = $('p_phonenumber').val();
+            if (name == '') {
+                alert('이름을 입력하세요');
+                $('#p_name').focus();
+                return
+            }
+            else if (address == '') {
+                alert('주소를 입력하세요');
+                $('#p_name').focus();
+                return
+            }
+            else if (phonenumber == '') {
+                alert('전화번호를 입력하세요');
+                $('#p_phonenumber').focus();
+                return
+            }
+
+
+
+    </script>
 </head>
 
 <body>
@@ -65,13 +108,14 @@
                 alt="상품 사진">
 
         </div>
+
         <div class="font2">
             <br>
             <h1>
                 펭귄을 팝니다
             </h1>
-
         </div>
+
         <div class="font1">
             <h3>
                 <br>리눅스의 로고에 있는 펭귄을 팝니다
@@ -84,29 +128,54 @@
             </h2>
         </div>
         <div class="form">
-            <div>
-                <label>주소</label>
-                <div>
-                    <input type="text">
-                </div>
-            </div>
 
-            <div>
-                <label>연락처</label>
-                <div>
-                    <input type="text">
-                </div>
-            </div>
+            <div class="input-group mb-3">
 
-            <div>
-                <br>
-                <div>
-                    <button type="submit" class="btn btn-primary">지금바로 주문!
-                    </button>
+                <div class="input-group-prepend">
+
+                    <span class="input-group-text" id="basic-addon1">주문자 성함</span>
+
+                </div>
+
+                <input type="text" class="form-control" id="p_name" placeholder="이름을 입력해주세요" aria-label="Username"
+                    aria-describedby="basic-addon1">
+
+
+                <div class="input-group mb-3">
+
+                    <div class="input-group-prepend">
+
+                        <span class="input-group-text" id="basic-addon1">주소</span>
+
+                    </div>
+
+                    <input type="text" class="form-control" id="p_address" placeholder="주소를 입력해주세요"
+                        aria-label="Username" aria-describedby="basic-addon1">
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text" id="basic-addon1">연락처</span>
+
+                        </div>
+
+                        <input type="text" class="form-control" id="p_phonenumber" placeholder="연락처를 입력해주세요"
+                            aria-label="Username" aria-describedby="basic-addon1">
+
+                    </div>
+
+
+                    <div>
+                        <br>
+                        <div class= "order">
+                            <button onclick="order()" type="button" class="btn btn-primary btn-lg btn-block">주문하기
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 </body>
 
 </html>
