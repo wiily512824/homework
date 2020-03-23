@@ -10,7 +10,7 @@
     <title>애완펭귄 분양</title>
 
     <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet"> 
 
     <!--CSS-->
 
@@ -31,14 +31,17 @@
         }
 
         .font1 {
+            font-family: 'Sunflower', sans-serif;
             color: darkslategray;
         }
 
         .font2 {
+            font-family: 'Sunflower', sans-serif;
             color: midnightblue;
         }
 
         .font3 {
+            font-family: 'Sunflower', sans-serif;
             color: darkslateblue;
         }
 
@@ -50,7 +53,7 @@
 
             margin: 2rem auto;
 
-            border-color: #555555;
+            border-color: #444444;
             ;
 
             border-radius: 0.5rem;
@@ -61,6 +64,8 @@
 
         }
     </style>
+
+    <!-- JS -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -75,17 +80,24 @@
     <script type="text/javascript">
 
         function order() {
-            let name = $('p_name').val();
-            let address = $('p_address').val();
-            let phonenumber = $('p_phonenumber').val();
-            if (name == '') {
+            let option = $('#p_option').val();
+            let name = $('#p_name').val();
+            let address = $('#p_address').val();
+            let phonenumber = $('#p_phonenumber').val();
+
+            if (option == ' -몇마리 분양하실지 골라주세요- ') {
+                alert('수량을 선택하세요')
+                $('#p_option').focus();
+                return
+            }
+            else if (name == '') {
                 alert('이름을 입력하세요');
                 $('#p_name').focus();
                 return
             }
             else if (address == '') {
                 alert('주소를 입력하세요');
-                $('#p_name').focus();
+                $('#p_address').focus();
                 return
             }
             else if (phonenumber == '') {
@@ -93,10 +105,12 @@
                 $('#p_phonenumber').focus();
                 return
             }
-
-
+            else
+                alert('주문완료')
+        }
 
     </script>
+
 </head>
 
 <body>
@@ -129,7 +143,21 @@
         </div>
         <div class="form">
 
+            <br>
             <div class="input-group mb-3">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                    </div>
+
+                    <select class="custom-select" id="p_option">
+                        <option selected value=""> -몇마리 분양하실지 골라주세요- </option>
+                        <option value="1">1마리</option>
+                        <option value="2">2마리</option>
+                        <option value="3">3마리</option>
+                    </select>
+                </div>
 
                 <div class="input-group-prepend">
 
@@ -170,7 +198,7 @@
                     <div>
                         <br>
                         <div class="order">
-                            <button onclick="order()" type="button" class="btn btn-primary btn-lg btn-block">주문하기
+                            <button onclick="order()" type="submit" class="btn btn-primary">주문하기
                             </button>
                         </div>
                     </div>
