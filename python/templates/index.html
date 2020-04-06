@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Webpage Title -->
+    <title>애완펭귄 분양</title>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
+
+    <!--CSS-->
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Style-->
+    <style>
+        .style {
+            width: 700px;
+            margin: auto;
+        }
+
+        body {
+            background-color: beige;
+        }
+
+        .font1 {
+            font-family: 'Sunflower', sans-serif;
+            color: darkslategray;
+        }
+
+        .font2 {
+            font-family: 'Sunflower', sans-serif;
+            color: midnightblue;
+        }
+
+        .font3 {
+            font-family: 'Sunflower', sans-serif;
+            color: darkslateblue;
+        }
+
+        .form {
+            background-color: darkkhaki;
+            max-width: 800px;
+
+            padding: 2rem;
+
+            margin: 2rem auto;
+
+            border-color: cadetblue;
+            ;
+
+            border-radius: 0.5rem;
+
+            border: double;
+
+            display: block;
+
+        }
+    </style>
+
+    <!-- JS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        function order() {
+            let option = $('#p_option').val();
+            let name = $('#p_name').val();
+            let address = $('#p_address').val();
+            let phonenumber = $('#p_phonenumber').val();
+
+            if (option == ' -몇마리 분양하실지 골라주세요- ') {
+                alert('수량을 선택하세요')
+                $('#p_option').focus();
+                return
+            }
+            else if (name == '') {
+                alert('이름을 입력하세요');
+                $('#p_name').focus();
+                return
+            }
+            else if (address == '') {
+                alert('주소를 입력하세요');
+                $('#p_address').focus();
+                return
+            }
+            else if (phonenumber == '') {
+                alert('전화번호를 입력하세요');
+                $('#p_phonenumber').focus();
+                return
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: { option_give: option, name_give: name, address_give: address, phone_give: phone },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('주문 완료!');
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            $('#order-box').html('');
+            listing();
+        });
+
+        function make_card(option, name, address, phone) {
+            let temp_html = '<tr>\
+                    <td>'+ option + '</td>\
+                    <td>'+ name + '</td>\
+                    <td>'+ address + '</td>\
+                    <td>'+ phone + '</td>\
+                            </tr>';
+            $('#orders-box').append(temp_html);
+        }
+
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/order",
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        let orders = response['orders'];
+                        console.log(orders);
+                        for (let i = 0; i < orders.length; i++) {
+                            let order = orders[i];
+                            let option = order['option'];
+                            let name = order['name'];
+                            let address = order['address'];
+                            let phonenumber = order['phonenumber'];
+                            make_card(option, name, address, phonenumber);
+                        }
+                    } else {
+                        alert('주문을 받아오지 못했습니다');
+                    }
+                }
+            });
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="style">
+        <div>
+            <img class="img"
+                src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F2065E9384FA50C9E11"
+                alt="상품 사진">
+
+        </div>
+
+        <div class="font2">
+            <br>
+            <h1>
+                펭귄을 팝니다
+            </h1>
+        </div>
+
+        <div class="font1">
+            <h3>
+                <br>리눅스의 로고에 있는 펭귄을 팝니다
+                <br>귀여운 펭귄을 분양받아가세요!
+            </h3>
+        </div>
+        <div class="font3">
+            <h2>
+                <br>가격:202000원/마리
+            </h2>
+        </div>
+        <div class="form">
+
+            <br>
+            <div class="input-group mb-3">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                    </div>
+
+                    <select class="custom-select" id="p_option">
+                        <option selected value=""> -몇마리 분양하실지 골라주세요- </option>
+                        <option value="1">1마리</option>
+                        <option value="2">2마리</option>
+                        <option value="3">3마리</option>
+                    </select>
+                </div>
+
+                <div class="input-group-prepend">
+
+                    <span class="input-group-text" id="basic-addon1">주문자 성함</span>
+
+                </div>
+
+                <input type="text" class="form-control" id="p_name" placeholder="이름을 입력해주세요" aria-label="Username"
+                    aria-describedby="basic-addon1">
+
+
+                <div class="input-group mb-3">
+
+                    <div class="input-group-prepend">
+
+                        <span class="input-group-text" id="basic-addon1">주소</span>
+
+                    </div>
+
+                    <input type="text" class="form-control" id="p_address" placeholder="주소를 입력해주세요"
+                        aria-label="Username" aria-describedby="basic-addon1">
+
+
+                    <div class="input-group mb-3">
+
+                        <div class="input-group-prepend">
+
+                            <span class="input-group-text" id="basic-addon1">연락처</span>
+
+                        </div>
+
+                        <input type="text" class="form-control" id="p_phonenumber" placeholder="연락처를 입력해주세요"
+                            aria-label="Username" aria-describedby="basic-addon1">
+
+                    </div>
+
+
+                    <div>
+                        <br>
+                        <div class="order">
+                            <button onclick="order()" type="submit" class="btn btn-primary">주문하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="orders">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">옵션</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">주소</th>
+                            <th scope="col">전화번호</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-box">
+                        <tr>
+                            <td>Otto    </td>
+                            <td>@mdo</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
