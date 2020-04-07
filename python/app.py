@@ -18,13 +18,13 @@ def write_order():
     name_receive = request.form['name_give']
     option_receive = request.form['option_give']
     address_receive = request.form['address_give']
-    phone_receive = request.form['phone_give']
+    phonenumber_receive = request.form['phonenumber_give']
 
     order = {
         'name': name_receive,
         'option': option_receive,
         'address': address_receive,
-        'phone': phone_receive
+        'phone': phonenumber_receive
     }
 
     db.orders.insert_one(order)

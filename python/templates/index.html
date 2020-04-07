@@ -109,7 +109,7 @@
             $.ajax({
                 type: "POST",
                 url: "/order",
-                data: { option_give: option, name_give: name, address_give: address, phone_give: phone },
+                data: { option_give: option, name_give: name, address_give: address, phonenumber_give: phonenumber },
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('주문 완료!');
@@ -124,7 +124,7 @@
             listing();
         });
 
-        function make_card(option, name, address, phone) {
+        function make_card(option, name, address, phonenumber) {
             let temp_html = '<tr>\
                     <td>'+ option + '</td>\
                     <td>'+ name + '</td>\
@@ -268,7 +268,7 @@
                     </thead>
                     <tbody id="orders-box">
                         <tr>
-                            <td>Otto    </td>
+                            <td>Otto</td>
                             <td>@mdo</td>
                             <td>Otto</td>
                             <td>@mdo</td>
